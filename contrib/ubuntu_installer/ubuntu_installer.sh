@@ -106,8 +106,10 @@ lightspeed_install() {
     GO111MODULE=on go build
     install lightspeed-webrtc /usr/local/bin/lightspeed-webrtc
 
+    # for discord embed
+    npm install -g npm@7.15.0
+    npm i @widgetbot/react-embed
 
-    npm install react-embed
     # react:
     cd ${GIT_ROOT}
     git clone ${REACT_REPO} Lightspeed-react
