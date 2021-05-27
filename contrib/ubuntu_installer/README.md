@@ -32,24 +32,18 @@ before certbot will need it to be ready.
 
 ## Run
 
-Example without TLS (no config necessary):
-
-```bash
-#!/bin/bash
-
-curl -L https://raw.githubusercontent.com/GRVYDEV/Project-Lightspeed/main/contrib/ubuntu_installer/ubuntu_installer.sh | sudo -E bash -xe
-```
-
 Example with TLS (config is set as env vars):
 
 ```bash
 #!/bin/bash
 
+적용되어있음
 export TLS_ON=true
 export DOMAIN=stream.example.com
 export ACME_EMAIL=email@example.com
+갸아악
 
-curl -L https://raw.githubusercontent.com/GRVYDEV/Project-Lightspeed/main/contrib/ubuntu_installer/ubuntu_installer.sh | sudo -E bash -xe
+curl -L https://raw.githubusercontent.com/chocosobo/Project-Lightspeed/main/contrib/ubuntu_installer/ubuntu_installer.sh | sudo -E bash -xe
 ```
 
 ## Get your stream key
