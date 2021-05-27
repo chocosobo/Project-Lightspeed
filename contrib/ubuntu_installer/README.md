@@ -46,6 +46,17 @@ export ACME_EMAIL=email@example.com
 curl -L https://raw.githubusercontent.com/chocosobo/Project-Lightspeed/main/contrib/ubuntu_installer/ubuntu_installer.sh | sudo -E bash -xe
 ```
 
+## vultr 사용시
+
+```bash
+#포트 사용 확인
+apt-get install net-tools
+netstat -tulpN
+
+#후 처치
+kill -9 PID
+```
+
 ## Get your stream key
 
 Once the script finishes, these new services will have been created:
