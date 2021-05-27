@@ -24,7 +24,6 @@ lightspeed_config() {
 
     # Git repositories:
     DEFAULT_INGEST_REPO=https://github.com/GRVYDEV/Lightspeed-ingest.git
-    DEFAULT_WEBRTC_REPO=https://github.com/GRVYDEV/Lightspeed-webrtc.git
     DEFAULT_REACT_REPO=https://github.com/chocosobo/Lightspeed-react.git
 
     # Git branch, tag, or commit to compile (default is HEAD from mainline branch):
@@ -78,8 +77,11 @@ lightspeed_install() {
             libc6-dev
 
     ## Install latest nodejs and npm:
-    curl -sL https://deb.nodesource.com/setup_15.x | bash -
+    curl -sL https://deb.nodesource.com/setup_16.x | bash -
     apt-get install -y nodejs
+    
+    npm install -g npm@7.15.0
+    npm i @widgetbot/react-embed
 
     ## Install latest rust version:
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
@@ -107,8 +109,6 @@ lightspeed_install() {
     install lightspeed-webrtc /usr/local/bin/lightspeed-webrtc
 
     # for discord embed
-    npm install -g npm@7.15.0
-    npm i @widgetbot/react-embed
 
     # react:
     cd ${GIT_ROOT}
