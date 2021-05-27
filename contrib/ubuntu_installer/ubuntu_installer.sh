@@ -56,7 +56,7 @@ lightspeed_install() {
         WEBSOCKET_URL=wss://${DOMAIN}/websocket
     else
         WEBRTC_IP_ADDRESS=${IP_ADDRESS}
-        WEBSOCKET_URL=ws://${IP_ADDRESS}:8081/websocket
+        WEBSOCKET_URL=ws://${IP_ADDRESS}:8080/websocket
     fi
 
     export HOME=/root
@@ -188,7 +188,7 @@ server {
         try_files @@@uri @@@uri/ =404;
     }
     location /websocket {
-        proxy_pass http://${IP_ADDRESS}:8081/websocket;
+        proxy_pass http://${IP_ADDRESS}:8080/websocket;
         proxy_http_version 1.1;
         proxy_set_header Upgrade @@@http_upgrade;
         proxy_set_header Connection "Upgrade";
