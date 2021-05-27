@@ -14,7 +14,7 @@
 </div>
 <br />
 <p align="center">
-    A self contained OBS -> FTL -> WebRTC live streaming server. Comprised of 3 parts once configured anyone can achieve sub-second OBS to the browser livestreaming 
+    OBS -> FTL -> WebRTC 생방송 서버용. 3 파트를 한번에
     <!-- <br /> -->
     <!-- <a href="https://github.com/GRVYDEV/Project-Lightspeed"><strong>Explore the docs »</strong></a> -->
     <br />
@@ -26,35 +26,35 @@
     <a href="https://github.com/GRVYDEV/Project-Lightspeed/issues">Request Features</a>
 </p>
 
-<!-- TABLE OF CONTENTS -->
+<!-- 목차 -->
 <details open="open">
-  <summary><h2 style="display: inline-block">Table of Contents</h2></summary>
+  <summary><h2 style="display: inline-block">목차</h2></summary>
   <ol>
     <li>
-      <a href="#about-the-project">About The Project</a>
+      <a href="#about-the-project">프로젝트 내용</a>
       <ul>
         <li><ul>
-          <li><a href="#how-it-works">How It Works</a></li>
-          <li><a href="#diagram">Diagram</a</li>
+          <li><a href="#how-it-works">작동 방법</a></li>
+          <li><a href="#diagram">디아그램</a</li>
         </ul></li>
-        <li><a href="#built-with">Built With</a></li>
-        <li><a href="#components">Components</a></li>
+        <li><a href="#built-with">작성 방법</a></li>
+        <li><a href="#components">컴포넌트</a></li>
       </ul>
     </li>
-    <li><a href="#discord">Discord</a></li>
+    <li><a href="#discord">디코</a></li>
     <li>
-      <a href="#getting-started">Getting Started</a>
+      <a href="#getting-started">시작하기</a>
       <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a>
+        <li><a href="#prerequisites">사전 준비</a></li>
+        <li><a href="#installation">설치</a>
             <ul>
                 <li><a href="#lightspeed-ingest">Lightspeed Ingest</a></li>
                 <li><a href="#lightspeed-webrtc">Lightspeed WebRTC</a></li>
                 <li><a href="#lightspeed-react">Lightspeed React</a></li>
             </ul>
         </li>
-        <li><a href="#docker">Docker / Compose</a></li>
-        <li><a href="#community-installation">Community Installation</a></li>
+        <li><a href="#docker">도커 / 컴포즈</a></li>
+        <li><a href="#community-installation">커뮤니티 설치</a></li>
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
