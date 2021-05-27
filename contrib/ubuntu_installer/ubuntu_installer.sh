@@ -106,6 +106,8 @@ lightspeed_install() {
     GO111MODULE=on go build
     install lightspeed-webrtc /usr/local/bin/lightspeed-webrtc
 
+
+    npm install react-embed
     # react:
     cd ${GIT_ROOT}
     git clone ${REACT_REPO} Lightspeed-react
