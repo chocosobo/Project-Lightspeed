@@ -25,7 +25,7 @@ lightspeed_config() {
     # Git repositories:
     DEFAULT_INGEST_REPO=https://github.com/GRVYDEV/Lightspeed-ingest.git
     DEFAULT_WEBRTC_REPO=https://github.com/GRVYDEV/Lightspeed-webrtc.git
-    DEFAULT_REACT_REPO=https://github.com/GRVYDEV/Lightspeed-react.git
+    DEFAULT_REACT_REPO=https://github.com/chocosobo/Lightspeed-react.git
 
     # Git branch, tag, or commit to compile (default is HEAD from mainline branch):
     DEFAULT_INGEST_GIT_REF=main
