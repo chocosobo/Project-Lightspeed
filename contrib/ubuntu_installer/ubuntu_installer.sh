@@ -100,16 +100,6 @@ lightspeed_install() {
     cargo build --release
     install target/release/lightspeed-ingest /usr/local/bin/lightspeed-ingest
 
-    # webrtc:
-    cd ${GIT_ROOT}
-    git clone ${WEBRTC_REPO} Lightspeed-webrtc
-    cd Lightspeed-webrtc
-    git checkout ${WEBRTC_GIT_REF}
-    GO111MODULE=on go build
-    install lightspeed-webrtc /usr/local/bin/lightspeed-webrtc
-
-    # for discord embed
-
     # react:
     cd ${GIT_ROOT}
     git clone ${REACT_REPO} Lightspeed-react
