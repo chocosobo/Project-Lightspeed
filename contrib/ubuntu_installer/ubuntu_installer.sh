@@ -15,7 +15,7 @@ lightspeed_config() {
     # YOUR email address to register Lets Encrypt account (only when TLS_ON=true)
     DEFAULT_ACME_EMAIL=hawawawiki@gmail.com
     # Domain name for your stream website (only when TLS_ON=true):
-    DEFAULT_DOMAIN=stream.hawawa.wiki
+    DEFAULT_DOMAIN=live.hawawa.wiki
 
     # Try to automatically find public IP address
     # Or you can just set IP_ADDRESS=x.x.x.x
