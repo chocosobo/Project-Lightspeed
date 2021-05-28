@@ -14,6 +14,7 @@ lightspeed_config() {
     DEFAULT_TLS_ON=true
     # YOUR email address to register Lets Encrypt account (only when TLS_ON=true)
     DEFAULT_ACME_EMAIL=hawawawiki@gmail.com
+
     # Domain name for your stream website (only when TLS_ON=true):
     DEFAULT_DOMAIN=live.hawawa.wiki
 
@@ -109,8 +110,8 @@ lightspeed_install() {
     cd ${GIT_ROOT}
     git clone ${REACT_REPO} Lightspeed-react
     cd Lightspeed-react
-    npm i @widgetbot/react-embed
     git checkout ${REACT_GIT_REF}
+    npm i @widgetbot/react-embed
     npm install
     npm run build
     mkdir -p /var/www/html
