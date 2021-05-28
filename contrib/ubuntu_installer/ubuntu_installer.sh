@@ -79,8 +79,6 @@ lightspeed_install() {
     ## Install latest nodejs and npm:
     curl -sL https://deb.nodesource.com/setup_16.x | bash -
     apt-get install -y nodejs
-    npm i -g npm@7.15.0
-    npm i @widgetbot/react-embed
 
     ## Install latest rust version:
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
@@ -103,6 +101,7 @@ lightspeed_install() {
     cd ${GIT_ROOT}
     git clone ${REACT_REPO} Lightspeed-react
     cd Lightspeed-react
+    npm i @widgetbot/react-embed
     git checkout ${REACT_GIT_REF}
     npm install
     npm run build
