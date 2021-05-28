@@ -16,7 +16,7 @@ lightspeed_config() {
     DEFAULT_ACME_EMAIL=jovehong@gmail.com
 
     # Domain name for your stream website (only when TLS_ON=true):
-    DEFAULT_DOMAIN=stream.chocosobo.com
+    DEFAULT_DOMAIN=test.chocosobo.com
 
     # Try to automatically find public IP address
     # Or you can just set IP_ADDRESS=x.x.x.x
@@ -28,7 +28,6 @@ lightspeed_config() {
 
     # Git branch, tag, or commit to compile (default is HEAD from mainline branch):
     DEFAULT_INGEST_GIT_REF=main
-    DEFAULT_WEBRTC_GIT_REF=main
     DEFAULT_REACT_GIT_REF=master
 
     # Directory to clone git repositories
@@ -42,19 +41,15 @@ lightspeed_install() {
     DOMAIN=${DOMAIN:-$DEFAULT_DOMAIN}
     IP_ADDRESS=${IP_ADDRESS:-$DEFAULT_IP_ADDRESS}
     INGEST_REPO=${INGEST_REPO:-$DEFAULT_INGEST_REPO}
-    WEBRTC_REPO=${WEBRTC_REPO:-$DEFAULT_WEBRTC_REPO}
     REACT_REPO=${REACT_REPO:-$DEFAULT_REACT_REPO}
     INGEST_GIT_REF=${INGEST_GIT_REF:-$DEFAULT_INGEST_GIT_REF}
-    WEBRTC_GIT_REF=${WEBRTC_GIT_REF:-$DEFAULT_WEBRTC_GIT_REF}
     REACT_GIT_REF=${REACT_GIT_REF:-$DEFAULT_REACT_GIT_REF}
     ACME_EMAIL=${ACME_EMAIL:-$DEFAULT_ACME_EMAIL}
     GIT_ROOT=${GIT_ROOT:-$DEFAULT_GIT_ROOT}
 
     if [ ${TLS_ON} = 'true' ]; then
-        WEBRTC_IP_ADDRESS=${IP_ADDRESS}
         WEBSOCKET_URL=wss://${DOMAIN}/websocket
     else
-        WEBRTC_IP_ADDRESS=${IP_ADDRESS}
         WEBSOCKET_URL=ws://${IP_ADDRESS}:8080/websocket
     fi
 
@@ -133,29 +128,10 @@ RestartSec=60
 WantedBy=network-online.target
 EOF
 
-    ## Create systemd service for webrtc:
-
-    cat <<EOF | sed 's/@@@/$/g' > /etc/systemd/system/lightspeed-webrtc.service
-[Unit]
-Description=Project Lightspeed webrtc service
-After=network-online.target
-
-[Service]
-TimeoutStartSec=0
-Environment=IP_ADDRESS=${WEBRTC_IP_ADDRESS}
-ExecStart=/usr/local/bin/lightspeed-webrtc --addr=@@@{IP_ADDRESS}
-Restart=always
-RestartSec=60
-
-[Install]
-WantedBy=network-online.target
-EOF
-
     ## Install and start services:
 
     systemctl daemon-reload
     systemctl enable --now lightspeed-ingest
-    systemctl enable --now lightspeed-webrtc
 
     ## Configure TLS with certbot:
 
