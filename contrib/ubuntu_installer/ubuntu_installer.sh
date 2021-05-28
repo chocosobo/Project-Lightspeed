@@ -13,10 +13,9 @@ lightspeed_config() {
     # Turn on HTTPS and proxy the websocket by setting TLS_ON=true
     DEFAULT_TLS_ON=true
     # YOUR email address to register Lets Encrypt account (only when TLS_ON=true)
-    DEFAULT_ACME_EMAIL=jovehong@gmail.com
-
+    DEFAULT_ACME_EMAIL=hawawawiki@gmail.com
     # Domain name for your stream website (only when TLS_ON=true):
-    DEFAULT_DOMAIN=test.chocosobo.com
+    DEFAULT_DOMAIN=stream.hawawa.wiki
 
     # Try to automatically find public IP address
     # Or you can just set IP_ADDRESS=x.x.x.x
@@ -24,10 +23,12 @@ lightspeed_config() {
 
     # Git repositories:
     DEFAULT_INGEST_REPO=https://github.com/GRVYDEV/Lightspeed-ingest.git
+    DEFAULT_WEBRTC_REPO=https://github.com/GRVYDEV/Lightspeed-webrtc.git
     DEFAULT_REACT_REPO=https://github.com/chocosobo/Lightspeed-react.git
 
     # Git branch, tag, or commit to compile (default is HEAD from mainline branch):
     DEFAULT_INGEST_GIT_REF=main
+    DEFAULT_WEBRTC_GIT_REF=main
     DEFAULT_REACT_GIT_REF=master
 
     # Directory to clone git repositories
@@ -41,15 +42,19 @@ lightspeed_install() {
     DOMAIN=${DOMAIN:-$DEFAULT_DOMAIN}
     IP_ADDRESS=${IP_ADDRESS:-$DEFAULT_IP_ADDRESS}
     INGEST_REPO=${INGEST_REPO:-$DEFAULT_INGEST_REPO}
+    WEBRTC_REPO=${WEBRTC_REPO:-$DEFAULT_WEBRTC_REPO}
     REACT_REPO=${REACT_REPO:-$DEFAULT_REACT_REPO}
     INGEST_GIT_REF=${INGEST_GIT_REF:-$DEFAULT_INGEST_GIT_REF}
+    WEBRTC_GIT_REF=${WEBRTC_GIT_REF:-$DEFAULT_WEBRTC_GIT_REF}
     REACT_GIT_REF=${REACT_GIT_REF:-$DEFAULT_REACT_GIT_REF}
     ACME_EMAIL=${ACME_EMAIL:-$DEFAULT_ACME_EMAIL}
     GIT_ROOT=${GIT_ROOT:-$DEFAULT_GIT_ROOT}
 
     if [ ${TLS_ON} = 'true' ]; then
+        WEBRTC_IP_ADDRESS=${IP_ADDRESS}
         WEBSOCKET_URL=wss://${DOMAIN}/websocket
     else
+        WEBRTC_IP_ADDRESS=${IP_ADDRESS}
         WEBSOCKET_URL=ws://${IP_ADDRESS}:8080/websocket
     fi
 
@@ -74,8 +79,7 @@ lightspeed_install() {
     ## Install latest nodejs and npm:
     curl -sL https://deb.nodesource.com/setup_16.x | bash -
     apt-get install -y nodejs
-    
-    npm install -g npm@7.15.0
+    npm i -g npm@7.15.0
     npm i @widgetbot/react-embed
 
     ## Install latest rust version:
@@ -116,14 +120,28 @@ EOF
 [Unit]
 Description=Project Lightspeed ingest service
 After=network-online.target
-
 [Service]
 TimeoutStartSec=0
 Environment=LS_INGEST_ADDR=${IP_ADDRESS}
 ExecStart=/usr/local/bin/lightspeed-ingest
 Restart=always
 RestartSec=60
+[Install]
+WantedBy=network-online.target
+EOF
 
+    ## Create systemd service for webrtc:
+
+    cat <<EOF | sed 's/@@@/$/g' > /etc/systemd/system/lightspeed-webrtc.service
+[Unit]
+Description=Project Lightspeed webrtc service
+After=network-online.target
+[Service]
+TimeoutStartSec=0
+Environment=IP_ADDRESS=${WEBRTC_IP_ADDRESS}
+ExecStart=/usr/local/bin/lightspeed-webrtc --addr=@@@{IP_ADDRESS}
+Restart=always
+RestartSec=60
 [Install]
 WantedBy=network-online.target
 EOF
@@ -145,7 +163,6 @@ server {
     server_name _;
     return 301 https://@@@host@@@request_uri;
 }
-
 server {
     server_name ${DOMAIN};
     listen 443 ssl;
