@@ -97,6 +97,14 @@ lightspeed_install() {
     cargo build --release
     install target/release/lightspeed-ingest /usr/local/bin/lightspeed-ingest
 
+    # webrtc:
+    cd ${GIT_ROOT}
+    git clone ${WEBRTC_REPO} Lightspeed-webrtc
+    cd Lightspeed-webrtc
+    git checkout ${WEBRTC_GIT_REF}
+    GO111MODULE=on go build
+    install lightspeed-webrtc /usr/local/bin/lightspeed-webrtc
+
     # react:
     cd ${GIT_ROOT}
     git clone ${REACT_REPO} Lightspeed-react
@@ -119,12 +127,14 @@ EOF
 [Unit]
 Description=Project Lightspeed ingest service
 After=network-online.target
+
 [Service]
 TimeoutStartSec=0
 Environment=LS_INGEST_ADDR=${IP_ADDRESS}
 ExecStart=/usr/local/bin/lightspeed-ingest
 Restart=always
 RestartSec=60
+
 [Install]
 WantedBy=network-online.target
 EOF
@@ -135,12 +145,14 @@ EOF
 [Unit]
 Description=Project Lightspeed webrtc service
 After=network-online.target
+
 [Service]
 TimeoutStartSec=0
 Environment=IP_ADDRESS=${WEBRTC_IP_ADDRESS}
 ExecStart=/usr/local/bin/lightspeed-webrtc --addr=@@@{IP_ADDRESS}
 Restart=always
 RestartSec=60
+
 [Install]
 WantedBy=network-online.target
 EOF
@@ -149,6 +161,7 @@ EOF
 
     systemctl daemon-reload
     systemctl enable --now lightspeed-ingest
+    systemctl enable --now lightspeed-webrtc
 
     ## Configure TLS with certbot:
 
@@ -162,6 +175,7 @@ server {
     server_name _;
     return 301 https://@@@host@@@request_uri;
 }
+
 server {
     server_name ${DOMAIN};
     listen 443 ssl;
