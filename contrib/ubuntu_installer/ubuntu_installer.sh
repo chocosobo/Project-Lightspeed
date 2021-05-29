@@ -111,6 +111,7 @@ lightspeed_install() {
     git clone ${REACT_REPO} Lightspeed-react
     cd Lightspeed-react
     git checkout ${REACT_GIT_REF}
+    npm i react-player
     npm i @widgetbot/react-embed
     npm install
     npm run build
