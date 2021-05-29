@@ -111,6 +111,7 @@ lightspeed_install() {
     git clone ${REACT_REPO} Lightspeed-react
     cd Lightspeed-react
     git checkout ${REACT_GIT_REF}
+    npm i react-native
     npm i react-native-vlc-media-player
     npm i react-native-orientation
     npm i @widgetbot/react-embed
