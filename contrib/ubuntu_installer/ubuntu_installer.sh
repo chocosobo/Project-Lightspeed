@@ -11,7 +11,7 @@ lightspeed_config() {
 
     # TLS is off by default.
     # Turn on HTTPS and proxy the websocket by setting TLS_ON=true
-    DEFAULT_TLS_ON=true
+    DEFAULT_TLS_ON=false
     # YOUR email address to register Lets Encrypt account (only when TLS_ON=true)
     DEFAULT_ACME_EMAIL=hawawawiki@gmail.com
 
