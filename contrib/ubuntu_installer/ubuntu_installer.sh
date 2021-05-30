@@ -112,6 +112,8 @@ lightspeed_install() {
     cd Lightspeed-react
     git checkout ${REACT_GIT_REF}
     npm i @widgetbot/react-embed
+    npm i react-native-orientation
+    npm i react-native-vlc-media-player
     npm install
     npm run build
     mkdir -p /var/www/html
