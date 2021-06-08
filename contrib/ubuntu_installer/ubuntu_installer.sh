@@ -78,7 +78,7 @@ lightspeed_install() {
             libc6-dev
 
     ## Install latest nodejs and npm:
-    curl -sL https://deb.nodesource.com/setup_16.x | bash -
+    curl -sL https://deb.nodesource.com/setup_15.x | bash -
     apt-get install -y nodejs
 
     ## Install latest rust version:
@@ -111,6 +111,7 @@ lightspeed_install() {
     git clone ${REACT_REPO} Lightspeed-react
     cd Lightspeed-react
     git checkout ${REACT_GIT_REF}
+    sudo npm install -g npm@7.16.0
     npm i @widgetbot/react-embed
     npm install
     npm run build
