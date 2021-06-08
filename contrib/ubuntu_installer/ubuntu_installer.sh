@@ -78,7 +78,7 @@ lightspeed_install() {
             libc6-dev
 
     ## Install latest nodejs and npm:
-    curl -sL https://deb.nodesource.com/setup_15.x | bash -
+    curl -sL https://deb.nodesource.com/setup_16.x | bash -
     apt-get install -y nodejs
 
     ## Install latest rust version:
