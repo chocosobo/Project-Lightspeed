@@ -111,9 +111,7 @@ lightspeed_install() {
     git clone ${REACT_REPO} Lightspeed-react
     cd Lightspeed-react
     git checkout ${REACT_GIT_REF}
-    npm install --save janus-ftl-player
     npm i @widgetbot/react-embed
-    npm i wowza-webrtc-player
     npm install
     npm run build
     mkdir -p /var/www/html
